@@ -1,3 +1,6 @@
+// Session 1 - IaC and Terraform Intro
+// To create an AWS VPC
+
 terraform {
   required_providers {
     aws = {
@@ -30,6 +33,10 @@ variable "region" {
   default     = "ap-south-1"
 }
 
+resource "random_pet" "this" {
+  length = 1
+}
+
 resource "aws_vpc" "vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = "true"
@@ -37,6 +44,31 @@ resource "aws_vpc" "vpc" {
   instance_tenancy     = "default"
 
   tags = {
-    Name = "iac-lab-placeholder:sandipanm"
+    //Name = "iac-lab-placeholder:sandipanm"
+    Name = format("%s-%s-vpc", var.prefix, random_pet.this.id)
   }
+}
+
+variable "subnet1_cidr" {
+  type        = string
+  description = "Subnet 1 CIDR block"
+  default     = "192.168.0.0/26"
+}
+
+variable "subnet2_cidr" {
+  type        = string
+  description = "Subnet 1 CIDR block"
+  default     = "192.168.0.64/26"
+}
+
+variable "subnet3_cidr" {
+  type        = string
+  description = "Subnet 1 CIDR block"
+  default     = "192.168.0.128/26"
+}
+
+variable "subnet4_cidr" {
+  type        = string
+  description = "Subnet 1 CIDR block"
+  default     = "192.168.0.192/26"
 }
