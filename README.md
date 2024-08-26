@@ -1,2 +1,8 @@
 # iac-lab-exercises-placeholder-sandipanm
-Learning Infra as Code
+key-pair*
+.terrform*
+*tfstate*
+.terraform/*
+*.terraform*
+!session*/backend_support/terraform.tfstate
+.DS_Store*
