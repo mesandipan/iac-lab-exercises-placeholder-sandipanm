@@ -5,11 +5,15 @@ resource "random_string" "bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "tfstate" {
-  bucket        = "${var.prefix}-tfstate-${random_string.bucket_suffix.result}"
+  bucket        = var.my_s3_bucket
   force_destroy = true
 
   versioning {
     enabled = true
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 
   server_side_encryption_configuration {
